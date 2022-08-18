@@ -26,7 +26,7 @@ md"_Homework 0, version 4 -- Spring 2021_"
 # ╔═╡ 7308bc54-e6cd-11ea-0eab-83f7535edf25
 # edit the code below to set your name and kerberos ID (i.e. email without @mit.edu)
 
-student = (name = "Jazzy Doe", kerberos_id = "jazz")
+student = (name = "Yusheng Zhao", kerberos_id = "yushengzhao2020")
 
 # press the ▶ button in the bottom right of this cell to run your edits
 # or use Shift+Enter
@@ -92,7 +92,7 @@ Output: $x^2$
 
 # ╔═╡ e02f7ea6-7024-11eb-3672-fd59a6cff79b
 function basic_square(x)
-	return 1 # this is wrong, write your code here!
+	return x*x
 end
 
 # ╔═╡ 6acef56c-7025-11eb-2524-819c30a75d39
@@ -162,8 +162,9 @@ This is because the square root must be between the numbers `x/a` and `a`. Why?
 
 # ╔═╡ bccf0e88-e754-11ea-3ab8-0170c2d44628
 ex_1_1 = md"""
-your answer here
-""" 
+x/a * a = x = \sqrt{x} * \sqrt{x}
+if \sqrt{x} is not between x/a and a, it must be equal.
+"""
 
 # you might need to wait until all other cells in this notebook have completed running. 
 # scroll down the page to see what's up
@@ -180,7 +181,14 @@ Write a function newton_sqrt(x) which implements the above algorithm."
 
 # ╔═╡ 4896bf0c-e754-11ea-19dc-1380bb356ab6
 function newton_sqrt(x, error_margin=0.01, a=x / 2) # a=x/2 is the default value of `a`
-	return x # this is wrong, write your code here!
+	x /= a
+	while abs(x-a) > error_margin
+		a_tmp = (x+a)/2
+		x *= a
+		x /= a_tmp
+		a = a_tmp
+	end
+	return  a
 end
 
 # ╔═╡ 7a01a508-e78a-11ea-11da-999d38785348
@@ -366,7 +374,7 @@ PlutoUI = "~0.7.38"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.3"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -431,8 +439,11 @@ deps = ["Random", "Serialization", "Sockets"]
 uuid = "8ba89e20-285c-5b6f-9357-94700520ee1b"
 
 [[deps.Downloads]]
-deps = ["ArgTools", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
+
+[[deps.FileWatching]]
+uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[deps.FixedPointNumbers]]
 deps = ["Statistics"]

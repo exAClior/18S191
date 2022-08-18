@@ -71,6 +71,7 @@ plot!(legend=false, axis=false, grid=false, ticks=false )
 # ╔═╡ dd81f7a5-1acf-430d-9d25-ab2877bf34cf
 md"""
 ## Lines and points
+This is a line that I wrote
 """
 
 # ╔═╡ a2114f43-709f-46c2-ba16-8030ec83a2ce
@@ -328,7 +329,7 @@ VegaLite = "~2.6.0"
 PLUTO_MANIFEST_TOML_CONTENTS = """
 # This file is machine-generated - editing it directly is not advised
 
-julia_version = "1.7.0"
+julia_version = "1.7.3"
 manifest_format = "2.0"
 
 [[deps.AbstractPlutoDingetjes]]
@@ -486,7 +487,7 @@ uuid = "497a8b3b-efae-58df-a0af-a86822472b78"
 version = "1.2.2"
 
 [[deps.Downloads]]
-deps = ["ArgTools", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 
 [[deps.EarCut_jll]]
@@ -530,6 +531,9 @@ deps = ["Compat", "Dates", "Mmap", "Printf", "Test", "UUIDs"]
 git-tree-sha1 = "129b104185df66e408edd6625d480b7f9e9823a0"
 uuid = "48062228-2e41-5def-b9a4-89aafe57970f"
 version = "0.9.18"
+
+[[deps.FileWatching]]
+uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[deps.FixedPointNumbers]]
 deps = ["Statistics"]
