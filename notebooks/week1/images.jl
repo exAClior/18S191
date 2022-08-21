@@ -16,9 +16,9 @@ end
 
 # ╔═╡ 74b008f6-ed6b-11ea-291f-b3791d6d1b35
 begin
-	using Colors, ColorVectorSpace, ImageShow, FileIO, ImageIO
-	using PlutoUI
-	using HypertextLiteral
+    using Colors, ColorVectorSpace, ImageShow, FileIO, ImageIO
+    using PlutoUI
+    using HypertextLiteral
 end
 
 # ╔═╡ e91d7926-ec6e-41e7-aba2-9dca333c8aa5
@@ -90,20 +90,20 @@ Welcome to the Computational Thinking using Julia for Real-World Problems, at MI
 The aim of this course is to bring together concepts from computer science and applied math with coding in the modern **Julia language**, and to see how to apply these techniques to study interesting applications (and of course to have fun).
 
 We would be pleased if students who have been interested in computer science now become interested in computational science and those interested in scientific applications learn computer science they may not see elsewhere.
-... and for all students, we wish to share the value of 
+... and for all students, we wish to share the value of
 the Julia  language as the best of both worlds.
 """
 
 # ╔═╡ e9ff96d8-6bc1-11eb-0f6a-234b9fae047e
 md"""
 
-## Alan's Essay: Are all programming languages the same? 
+## Alan's Essay: Are all programming languages the same?
 
 >Superficially, many programming languages are very similar.  "Showoffs" will compare functional programming vs imperative programming.  Others will compare compiled languages vs dynamic languages.  I will avoid such fancy terms in this little essay, preferring to provide this course's pedagogical viewpoint.
 >
 >Generally speaking beginning programmers should learn to create "arrays" write "for loops", "conditionals", "comparisons", express mathematical formulas, etc. So why Julia at a time when Python seems to be the language of teaching, and Java and C++ so prominent in the corporate world?
 >
->As you might imagine, we believe Julia is special.   Oh you will still have the nitty gritty of when to use a bracket and a comma.  You might have strong opinions as to whether arrays should begin with 0 or 1 (joke: some say it's time to compromise and use ½.)  Getting past these irrelevant issues,  you will begin to experience one by one what makes Julia so very special.  For starters, a language that runs fast is more fun.  We can have you try things that would just be so slow in other languages it would be boring.  We also think you will start to notice how natural Julia is, how it feels like the mathematics, and how flexible it can be.  
+>As you might imagine, we believe Julia is special.   Oh you will still have the nitty gritty of when to use a bracket and a comma.  You might have strong opinions as to whether arrays should begin with 0 or 1 (joke: some say it's time to compromise and use ½.)  Getting past these irrelevant issues,  you will begin to experience one by one what makes Julia so very special.  For starters, a language that runs fast is more fun.  We can have you try things that would just be so slow in other languages it would be boring.  We also think you will start to notice how natural Julia is, how it feels like the mathematics, and how flexible it can be.
 >
 >Getting to see the true value of fancy terms like multiple dispatch, strong typing, generic programming, and composable software will take a little longer, but stick with us, and you too will see why Julia is so very special.
 """
@@ -117,7 +117,7 @@ md"""
 md"""
 Applications of computer science in the real world use **data**, i.e. information that we can **measure** in some way. Data take many different forms, for example:
 
-- Numbers that change over time (**time series**): 
+- Numbers that change over time (**time series**):
   - Stock price each second / minute / day
   - Weekly number of infections
   - Earth's global average temperature
@@ -134,7 +134,7 @@ Applications of computer science in the real world use **data**, i.e. informatio
 
 # ╔═╡ b795dcb4-6bc3-11eb-20ec-db2cc4b89bfb
 md"""
-#### Exercise: 
+#### Exercise:
 > Think of another two examples in each category. Can you think of other categories of data?
 """
 
@@ -161,7 +161,7 @@ We often want to make a mathematical or computational **model** that can help us
 # ╔═╡ 132f6596-6bc6-11eb-29f1-1b2478c929af
 md"""
 # Data: Images (as an example of data)
-Let's start off by looking at **images** and how we can process them. 
+Let's start off by looking at **images** and how we can process them.
 Our goal is to process the data contained in an image in some way, which we will do by developing and coding certain **algorithms**.
 
 Here is the the Fall 2020 version of this lecture (small variations) by 3-Blue-1-Brown (Grant Sanderson) for your reference.
@@ -176,10 +176,10 @@ html"""
 md"""
 
 
-If we open an image on our computer or the web and zoom in enough, we will see that it consists of many tiny squares, or **pixels** ("picture elements"). Each pixel is a block of one single colour, and the pixels are arranged in a two-dimensional square grid. 
+If we open an image on our computer or the web and zoom in enough, we will see that it consists of many tiny squares, or **pixels** ("picture elements"). Each pixel is a block of one single colour, and the pixels are arranged in a two-dimensional square grid.
 
 You probably already know that these pixels are stored in a computer numerically
-perhaps in some form of RGB (red,green,blue) format.  This is the computer's represenation of the data.   
+perhaps in some form of RGB (red,green,blue) format.  This is the computer's represenation of the data.
 
 Note that an image is already an **approximation** of the real world -- it is a two-dimensional, discrete representation of a three-dimensional reality.
 
@@ -210,7 +210,7 @@ output is more interesting than code.  This takes some getting used to.)
 """
 
 # ╔═╡ 34ee0954-601e-11eb-1912-97dc2937fd52
-url = "https://user-images.githubusercontent.com/6933510/107239146-dcc3fd00-6a28-11eb-8c7b-41aaf6618935.png" 
+url = "https://user-images.githubusercontent.com/6933510/107239146-dcc3fd00-6a28-11eb-8c7b-41aaf6618935.png"
 
 # ╔═╡ 9180fbcc-601e-11eb-0c22-c920dc7ee9a9
 md"""
@@ -288,12 +288,12 @@ philip_width = philip_size[2]
 md"""
 ### Locations in an image: Indexing
 
-Now suppose that we want to examine a piece of the image in more detail. We need some way of specifying which piece of the image we want. 
+Now suppose that we want to examine a piece of the image in more detail. We need some way of specifying which piece of the image we want.
 
-Thinking of the image as a grid of pixels, we need a way to tell the computer which pixel or group of pixels we want to refer to. 
+Thinking of the image as a grid of pixels, we need a way to tell the computer which pixel or group of pixels we want to refer to.
 Since the image is a two-dimensional grid, we can use two integers (whole numbers) to give the coordinates of a single pixel.  Specifying coordinates like this is called **indexing**: think of the index of a book, which tells you *on which page* an idea is discussed.
 
-In Julia we use (square) brackets, `[` and `]` for indexing: 
+In Julia we use (square) brackets, `[` and `]` for indexing:
 """
 
 # ╔═╡ bd22d09a-64c7-11eb-146f-67733b8be241
@@ -326,7 +326,7 @@ md"""
 @bind col_i Slider(1:size(philip)[2], show_value=true)
 
 # ╔═╡ 94b77934-713e-11eb-18cf-c5dc5e7afc5b
-row_i,col_i
+row_i, col_i
 
 # ╔═╡ ff762861-b186-4eb0-9582-0ce66ca10f60
 philip[row_i, col_i]
@@ -417,11 +417,11 @@ RGB(1.0, 0.0, 0.0)
 
 # ╔═╡ c2907d1a-47b1-4634-8669-a68022706861
 begin
-	md"""
-	A pixel with $(@bind test_r Scrubbable(0:0.1:1; default=0.1)) red, $(@bind test_g Scrubbable(0:0.1:1; default=0.5)) green and $(@bind test_b Scrubbable(0:0.1:1; default=1.0)) blue looks like:
-	"""
+    md"""
+    A pixel with $(@bind test_r Scrubbable(0:0.1:1; default=0.1)) red, $(@bind test_g Scrubbable(0:0.1:1; default=0.5)) green and $(@bind test_b Scrubbable(0:0.1:1; default=1.0)) blue looks like:
+    """
 end
-	
+
 
 # ╔═╡ ff9eea3f-cab0-4030-8337-f519b94316c5
 RGB(test_r, test_g, test_b)
@@ -434,8 +434,8 @@ md"""
 
 # ╔═╡ 63e8d636-ee0b-11ea-173d-bd3327347d55
 function invert(color::AbstractRGB)
-	
-	return missing
+
+    return RGB(1 - color.r, 1 - color.g, 1 - color.b)
 end
 
 # ╔═╡ 2cc2f84e-ee0d-11ea-373b-e7ad3204bb00
@@ -457,7 +457,7 @@ invert(red)
 md"Can you invert the picture of Philip?"
 
 # ╔═╡ 943103e2-ee0b-11ea-33aa-75a8a1529931
-philip_inverted = missing
+philip_inverted = invert.(philip)
 
 # ╔═╡ 2ee543b2-64d6-11eb-3c39-c5660141787e
 md"""
@@ -471,9 +471,9 @@ We do this by assigning a new value to the color of a pixel:
 
 # ╔═╡ 53bad296-4c7b-471f-b481-0e9423a9288a
 let
-	temp = copy(philip_head)
-	temp[100, 200] = RGB(1.0, 0.0, 0.0)
-	temp
+    temp = copy(philip_head)
+    temp[100, 200] = RGB(1.0, 0.0, 0.0)
+    temp
 end
 
 # ╔═╡ ab9af0f6-64c9-11eb-13d3-5dbdb75a69a7
@@ -501,9 +501,9 @@ And then modify it:
 
 # ╔═╡ 4f03f651-56ed-4361-b954-e6848ac56089
 let
-	temp = copy(philip_head)
-	temp[50, 50:100] .= RGB(1.0, 0.0, 0.0)
-	temp
+    temp = copy(philip_head)
+    temp[50, 50:100] .= RGB(1.0, 0.0, 0.0)
+    temp
 end
 
 # ╔═╡ 2808339c-64cc-11eb-21d1-c76a9854aa5b
@@ -513,9 +513,9 @@ Similarly we can modify a whole rectangular block of pixels:
 
 # ╔═╡ 1bd53326-d705-4d1a-bf8f-5d7f2a4e696f
 let
-	temp = copy(philip_head)
-	temp[50:100, 50:100] .= RGB(1.0, 0.0, 0.0)
-	temp
+    temp = copy(philip_head)
+    temp[50:100, 50:100] .= RGB(1.0, 0.0, 0.0)
+    temp
 end
 
 # ╔═╡ a5f8bafe-edf0-11ea-0da3-3330861ae43a
@@ -527,8 +527,9 @@ md"""
 
 # ╔═╡ b6b65b94-edf0-11ea-3686-fbff0ff53d08
 function create_bar()
-	
-	return missing
+    myVec = zeros(100)
+    myVec[40:60] .= 1
+    return myVec
 end
 
 # ╔═╡ 693af19c-64cc-11eb-31f3-57ab2fbae597
@@ -546,7 +547,7 @@ reduced_image = philip[1:10:end, 1:10:end]
 
 # ╔═╡ c29292b8-64cc-11eb-28db-b52c46e865e6
 md"""
-Note that the resulting image doesn't look very good, since we seem to have lost too much detail. 
+Note that the resulting image doesn't look very good, since we seem to have lost too much detail.
 
 #### Exercise
 
@@ -555,10 +556,10 @@ Note that the resulting image doesn't look very good, since we seem to have lost
 
 # ╔═╡ 7b04331a-6bcb-11eb-34fa-1f5b151e5510
 md"""
-# Model: Creating synthetic images 
+# Model: Creating synthetic images
 
 Think about your favorite Pixar movie (e.g. Monsters Inc.) Movie frames are images that are generated from complicated mathematical models.  Ray tracing (which may be covered in this class)
-is a method for making images feel realistic.  
+is a method for making images feel realistic.
 """
 
 # ╔═╡ 5319c03c-64cc-11eb-0743-a1612476e2d3
@@ -573,14 +574,14 @@ save("reduced_phil.png", reduced_image)
 
 # ╔═╡ 61606acc-6bcc-11eb-2c80-69ceec9f9702
 md"""
-# $(html"<br>")   
+# $(html"<br>")
 """
 
 # ╔═╡ dd183eca-6018-11eb-2a83-2fcaeea62942
 md"""
 # Computer science: Arrays
 
-An image is a concrete example of a fundamental concept in computer science, namely an **array**. 
+An image is a concrete example of a fundamental concept in computer science, namely an **array**.
 
 Just as an image is a rectangular grid, where each grid cell contains a single color,
 an array is a rectangular grid for storing data. Data is stored and retrieved using indexing, just as in the image examples: each cell in the grid can store a single "piece of data" of a given type.
@@ -628,8 +629,8 @@ Matrices, or two-dimensional arrays, also use square brackets, but with spaces a
 """
 
 # ╔═╡ 3b2b041a-64d4-11eb-31dd-47d7321ee909
-[RGB(1, 0, 0)  RGB(0, 1, 0)
- RGB(0, 0, 1)  RGB(0.5, 0.5, 0.5)]
+[RGB(1, 0, 0) RGB(0, 1, 0)
+    RGB(0, 0, 1) RGB(0.5, 0.5, 0.5)]
 
 # ╔═╡ 0f35603a-64d4-11eb-3baf-4fef06d82daa
 md"""
@@ -668,11 +669,11 @@ We often want to join vectors and matrices together. We can do so using an exten
 """
 
 # ╔═╡ 7d9ad134-60ee-11eb-1b2a-a7d63f3a7a2d
-[philip_head  philip_head]
+[philip_head philip_head]
 
 # ╔═╡ 8433b862-60ee-11eb-0cfc-add2b72997dc
-[philip_head                   reverse(philip_head, dims=2)
- reverse(philip_head, dims=1)  rot180(philip_head)]
+[philip_head reverse(philip_head, dims=2)
+    reverse(philip_head, dims=1) rot180(philip_head)]
 
 # ╔═╡ 5e52d12e-64d7-11eb-0905-c9038a404e24
 md"""
@@ -709,9 +710,6 @@ md"""
 Let's use this to make a slider for our one-dimensional collection of reds:
 """
 
-# ╔═╡ 88933746-6028-11eb-32de-13eb6ff43e29
-[RGB(red_value / number_reds, 0, 0) for red_value in 0:number_reds]
-
 # ╔═╡ 1c539b02-64d8-11eb-3505-c9288357d139
 md"""
 When you move the slider, you should see the number of red color patches change!
@@ -728,6 +726,15 @@ md"""
 
 > Make three sliders with variables `r`, `g` and `b`. Then make a single color patch with the RGB color given by those values.
 """
+
+# ╔═╡ b470c97d-a914-4750-9dc6-9ce358e23ec4
+@bind number_blues Slider(1:100, show_value=true)
+
+# ╔═╡ adad042b-3c2d-4dcf-83fe-327fe299d024
+@bind number_greens Slider(1:100, show_value=true)
+
+# ╔═╡ 9551e83b-79ee-48e3-a5b5-aceeae2610ef
+[RGB(0, green / number_greens, blue / number_blues) for green in 0:number_greens, blue in 0:number_blues]
 
 # ╔═╡ 576d5e3a-64d8-11eb-10c9-876be31f7830
 md"""
@@ -754,8 +761,8 @@ md"""
 
 # ╔═╡ 5da8cbe8-eded-11ea-2e43-c5b7cc71e133
 begin
-	colored_line(x::Vector{<:Real}) = Gray.(Float64.((hcat(x)')))
-	colored_line(x::Any) = nothing
+    colored_line(x::Vector{<:Real}) = Gray.(Float64.((hcat(x)')))
+    colored_line(x::Any) = nothing
 end
 
 # ╔═╡ d862fb16-edf1-11ea-36ec-615d521e6bc0
@@ -784,22 +791,22 @@ not_defined(variable_name) = Markdown.MD(Markdown.Admonition("danger", "Oopsie!"
 
 # ╔═╡ e3394c8a-edf0-11ea-1bb8-619f7abb6881
 if !@isdefined(create_bar)
-	not_defined(:create_bar)
+    not_defined(:create_bar)
 else
-	let
-		result = create_bar()
-		if ismissing(result)
-			still_missing()
-		elseif isnothing(result)
-			keep_working(md"Did you forget to write `return`?")
-		elseif !(result isa Vector) || length(result) != 100
-			keep_working(md"The result should be a `Vector` with 100 elements.")
-		elseif result[[1,50,100]] != [0,1,0]
-			keep_working()
-		else
-			correct()
-		end
-	end
+    let
+        result = create_bar()
+        if ismissing(result)
+            still_missing()
+        elseif isnothing(result)
+            keep_working(md"Did you forget to write `return`?")
+        elseif !(result isa Vector) || length(result) != 100
+            keep_working(md"The result should be a `Vector` with 100 elements.")
+        elseif result[[1, 50, 100]] != [0, 1, 0]
+            keep_working()
+        else
+            correct()
+        end
+    end
 end
 
 # ╔═╡ e0a6031c-601b-11eb-27a5-65140dd92897
@@ -809,207 +816,207 @@ bigbreak = html"<br><br><br><br><br>";
 bigbreak
 
 # ╔═╡ e0b15582-601b-11eb-26d6-bbf708933bc8
-function camera_input(;max_size=150, default_url="https://i.imgur.com/SUmi94P.png")
-"""
-<span class="pl-image waiting-for-permission">
-<style>
-	
-	.pl-image.popped-out {
-		position: fixed;
-		top: 0;
-		right: 0;
-		z-index: 5;
-	}
+function camera_input(; max_size=150, default_url="https://i.imgur.com/SUmi94P.png")
+    """
+    <span class="pl-image waiting-for-permission">
+    <style>
 
-	.pl-image #video-container {
-		width: 250px;
-	}
+    	.pl-image.popped-out {
+    		position: fixed;
+    		top: 0;
+    		right: 0;
+    		z-index: 5;
+    	}
 
-	.pl-image video {
-		border-radius: 1rem 1rem 0 0;
-	}
-	.pl-image.waiting-for-permission #video-container {
-		display: none;
-	}
-	.pl-image #prompt {
-		display: none;
-	}
-	.pl-image.waiting-for-permission #prompt {
-		width: 250px;
-		height: 200px;
-		display: grid;
-		place-items: center;
-		font-family: monospace;
-		font-weight: bold;
-		text-decoration: underline;
-		cursor: pointer;
-		border: 5px dashed rgba(0,0,0,.5);
-	}
+    	.pl-image #video-container {
+    		width: 250px;
+    	}
 
-	.pl-image video {
-		display: block;
-	}
-	.pl-image .bar {
-		width: inherit;
-		display: flex;
-		z-index: 6;
-	}
-	.pl-image .bar#top {
-		position: absolute;
-		flex-direction: column;
-	}
-	
-	.pl-image .bar#bottom {
-		background: black;
-		border-radius: 0 0 1rem 1rem;
-	}
-	.pl-image .bar button {
-		flex: 0 0 auto;
-		background: rgba(255,255,255,.8);
-		border: none;
-		width: 2rem;
-		height: 2rem;
-		border-radius: 100%;
-		cursor: pointer;
-		z-index: 7;
-	}
-	.pl-image .bar button#shutter {
-		width: 3rem;
-		height: 3rem;
-		margin: -1.5rem auto .2rem auto;
-	}
+    	.pl-image video {
+    		border-radius: 1rem 1rem 0 0;
+    	}
+    	.pl-image.waiting-for-permission #video-container {
+    		display: none;
+    	}
+    	.pl-image #prompt {
+    		display: none;
+    	}
+    	.pl-image.waiting-for-permission #prompt {
+    		width: 250px;
+    		height: 200px;
+    		display: grid;
+    		place-items: center;
+    		font-family: monospace;
+    		font-weight: bold;
+    		text-decoration: underline;
+    		cursor: pointer;
+    		border: 5px dashed rgba(0,0,0,.5);
+    	}
 
-	.pl-image video.takepicture {
-		animation: pictureflash 200ms linear;
-	}
+    	.pl-image video {
+    		display: block;
+    	}
+    	.pl-image .bar {
+    		width: inherit;
+    		display: flex;
+    		z-index: 6;
+    	}
+    	.pl-image .bar#top {
+    		position: absolute;
+    		flex-direction: column;
+    	}
 
-	@keyframes pictureflash {
-		0% {
-			filter: grayscale(1.0) contrast(2.0);
-		}
+    	.pl-image .bar#bottom {
+    		background: black;
+    		border-radius: 0 0 1rem 1rem;
+    	}
+    	.pl-image .bar button {
+    		flex: 0 0 auto;
+    		background: rgba(255,255,255,.8);
+    		border: none;
+    		width: 2rem;
+    		height: 2rem;
+    		border-radius: 100%;
+    		cursor: pointer;
+    		z-index: 7;
+    	}
+    	.pl-image .bar button#shutter {
+    		width: 3rem;
+    		height: 3rem;
+    		margin: -1.5rem auto .2rem auto;
+    	}
 
-		100% {
-			filter: grayscale(0.0) contrast(1.0);
-		}
-	}
-</style>
+    	.pl-image video.takepicture {
+    		animation: pictureflash 200ms linear;
+    	}
 
-	<div id="video-container">
-		<div id="top" class="bar">
-			<button id="stop" title="Stop video">✖</button>
-			<button id="pop-out" title="Pop out/pop in">⏏</button>
-		</div>
-		<video playsinline autoplay></video>
-		<div id="bottom" class="bar">
-		<button id="shutter" title="Click to take a picture">📷</button>
-		</div>
-	</div>
-		
-	<div id="prompt">
-		<span>
-		Enable webcam
-		</span>
-	</div>
+    	@keyframes pictureflash {
+    		0% {
+    			filter: grayscale(1.0) contrast(2.0);
+    		}
 
-<script>
-	// based on https://github.com/fonsp/printi-static (by the same author)
+    		100% {
+    			filter: grayscale(0.0) contrast(1.0);
+    		}
+    	}
+    </style>
 
-	const span = currentScript.parentElement
-	const video = span.querySelector("video")
-	const popout = span.querySelector("button#pop-out")
-	const stop = span.querySelector("button#stop")
-	const shutter = span.querySelector("button#shutter")
-	const prompt = span.querySelector(".pl-image #prompt")
+    	<div id="video-container">
+    		<div id="top" class="bar">
+    			<button id="stop" title="Stop video">✖</button>
+    			<button id="pop-out" title="Pop out/pop in">⏏</button>
+    		</div>
+    		<video playsinline autoplay></video>
+    		<div id="bottom" class="bar">
+    		<button id="shutter" title="Click to take a picture">📷</button>
+    		</div>
+    	</div>
 
-	const maxsize = $(max_size)
+    	<div id="prompt">
+    		<span>
+    		Enable webcam
+    		</span>
+    	</div>
 
-	const send_source = (source, src_width, src_height) => {
-		const scale = Math.min(1.0, maxsize / src_width, maxsize / src_height)
+    <script>
+    	// based on https://github.com/fonsp/printi-static (by the same author)
 
-		const width = Math.floor(src_width * scale)
-		const height = Math.floor(src_height * scale)
+    	const span = currentScript.parentElement
+    	const video = span.querySelector("video")
+    	const popout = span.querySelector("button#pop-out")
+    	const stop = span.querySelector("button#stop")
+    	const shutter = span.querySelector("button#shutter")
+    	const prompt = span.querySelector(".pl-image #prompt")
 
-		const canvas = html`<canvas width=\${width} height=\${height}>`
-		const ctx = canvas.getContext("2d")
-		ctx.drawImage(source, 0, 0, width, height)
+    	const maxsize = $(max_size)
 
-		span.value = {
-			width: width,
-			height: height,
-			data: ctx.getImageData(0, 0, width, height).data,
-		}
-		span.dispatchEvent(new CustomEvent("input"))
-	}
-	
-	const clear_camera = () => {
-		window.stream.getTracks().forEach(s => s.stop());
-		video.srcObject = null;
+    	const send_source = (source, src_width, src_height) => {
+    		const scale = Math.min(1.0, maxsize / src_width, maxsize / src_height)
 
-		span.classList.add("waiting-for-permission");
-	}
+    		const width = Math.floor(src_width * scale)
+    		const height = Math.floor(src_height * scale)
 
-	prompt.onclick = () => {
-		navigator.mediaDevices.getUserMedia({
-			audio: false,
-			video: {
-				facingMode: "environment",
-			},
-		}).then(function(stream) {
+    		const canvas = html`<canvas width=\${width} height=\${height}>`
+    		const ctx = canvas.getContext("2d")
+    		ctx.drawImage(source, 0, 0, width, height)
 
-			stream.onend = console.log
+    		span.value = {
+    			width: width,
+    			height: height,
+    			data: ctx.getImageData(0, 0, width, height).data,
+    		}
+    		span.dispatchEvent(new CustomEvent("input"))
+    	}
 
-			window.stream = stream
-			video.srcObject = stream
-			window.cameraConnected = true
-			video.controls = false
-			video.play()
-			video.controls = false
+    	const clear_camera = () => {
+    		window.stream.getTracks().forEach(s => s.stop());
+    		video.srcObject = null;
 
-			span.classList.remove("waiting-for-permission");
+    		span.classList.add("waiting-for-permission");
+    	}
 
-		}).catch(function(error) {
-			console.log(error)
-		});
-	}
-	stop.onclick = () => {
-		clear_camera()
-	}
-	popout.onclick = () => {
-		span.classList.toggle("popped-out")
-	}
+    	prompt.onclick = () => {
+    		navigator.mediaDevices.getUserMedia({
+    			audio: false,
+    			video: {
+    				facingMode: "environment",
+    			},
+    		}).then(function(stream) {
 
-	shutter.onclick = () => {
-		const cl = video.classList
-		cl.remove("takepicture")
-		void video.offsetHeight
-		cl.add("takepicture")
-		video.play()
-		video.controls = false
-		console.log(video)
-		send_source(video, video.videoWidth, video.videoHeight)
-	}
-	
-	
-	document.addEventListener("visibilitychange", () => {
-		if (document.visibilityState != "visible") {
-			clear_camera()
-		}
-	})
+    			stream.onend = console.log
+
+    			window.stream = stream
+    			video.srcObject = stream
+    			window.cameraConnected = true
+    			video.controls = false
+    			video.play()
+    			video.controls = false
+
+    			span.classList.remove("waiting-for-permission");
+
+    		}).catch(function(error) {
+    			console.log(error)
+    		});
+    	}
+    	stop.onclick = () => {
+    		clear_camera()
+    	}
+    	popout.onclick = () => {
+    		span.classList.toggle("popped-out")
+    	}
+
+    	shutter.onclick = () => {
+    		const cl = video.classList
+    		cl.remove("takepicture")
+    		void video.offsetHeight
+    		cl.add("takepicture")
+    		video.play()
+    		video.controls = false
+    		console.log(video)
+    		send_source(video, video.videoWidth, video.videoHeight)
+    	}
 
 
-	// Set a default image
+    	document.addEventListener("visibilitychange", () => {
+    		if (document.visibilityState != "visible") {
+    			clear_camera()
+    		}
+    	})
 
-	const img = html`<img crossOrigin="anonymous">`
 
-	img.onload = () => {
-	console.log("helloo")
-		send_source(img, img.width, img.height)
-	}
-	img.src = "$(default_url)"
-	console.log(img)
-</script>
-</span>
-""" |> HTML
+    	// Set a default image
+
+    	const img = html`<img crossOrigin="anonymous">`
+
+    	img.onload = () => {
+    	console.log("helloo")
+    		send_source(img, img.width, img.height)
+    	}
+    	img.src = "$(default_url)"
+    	console.log(img)
+    </script>
+    </span>
+    """ |> HTML
 end
 
 # ╔═╡ d6742ea0-1106-4f3c-a5b8-a31a48d33f19
@@ -1021,36 +1028,36 @@ end
 # ╔═╡ e891fce0-601b-11eb-383b-bde5b128822e
 
 function process_raw_camera_data(raw_camera_data)
-	# the raw image data is a long byte array, we need to transform it into something
-	# more "Julian" - something with more _structure_.
-	
-	# The encoding of the raw byte stream is:
-	# every 4 bytes is a single pixel
-	# every pixel has 4 values: Red, Green, Blue, Alpha
-	# (we ignore alpha for this notebook)
-	
-	# So to get the red values for each pixel, we take every 4th value, starting at 
-	# the 1st:
-	reds_flat = UInt8.(raw_camera_data["data"][1:4:end])
-	greens_flat = UInt8.(raw_camera_data["data"][2:4:end])
-	blues_flat = UInt8.(raw_camera_data["data"][3:4:end])
-	
-	# but these are still 1-dimensional arrays, nicknamed 'flat' arrays
-	# We will 'reshape' this into 2D arrays:
-	
-	width = raw_camera_data["width"]
-	height = raw_camera_data["height"]
-	
-	# shuffle and flip to get it in the right shape
-	reds = reshape(reds_flat, (width, height))' / 255.0
-	greens = reshape(greens_flat, (width, height))' / 255.0
-	blues = reshape(blues_flat, (width, height))' / 255.0
-	
-	# we have our 2D array for each color
-	# Let's create a single 2D array, where each value contains the R, G and B value of 
-	# that pixel
-	
-	RGB.(reds, greens, blues)
+    # the raw image data is a long byte array, we need to transform it into something
+    # more "Julian" - something with more _structure_.
+
+    # The encoding of the raw byte stream is:
+    # every 4 bytes is a single pixel
+    # every pixel has 4 values: Red, Green, Blue, Alpha
+    # (we ignore alpha for this notebook)
+
+    # So to get the red values for each pixel, we take every 4th value, starting at
+    # the 1st:
+    reds_flat = UInt8.(raw_camera_data["data"][1:4:end])
+    greens_flat = UInt8.(raw_camera_data["data"][2:4:end])
+    blues_flat = UInt8.(raw_camera_data["data"][3:4:end])
+
+    # but these are still 1-dimensional arrays, nicknamed 'flat' arrays
+    # We will 'reshape' this into 2D arrays:
+
+    width = raw_camera_data["width"]
+    height = raw_camera_data["height"]
+
+    # shuffle and flip to get it in the right shape
+    reds = reshape(reds_flat, (width, height))' / 255.0
+    greens = reshape(greens_flat, (width, height))' / 255.0
+    blues = reshape(blues_flat, (width, height))' / 255.0
+
+    # we have our 2D array for each color
+    # Let's create a single 2D array, where each value contains the R, G and B value of
+    # that pixel
+
+    RGB.(reds, greens, blues)
 end
 
 # ╔═╡ 1d7375b7-7ea6-4d67-ab73-1c69d6b8b87f
@@ -1058,8 +1065,8 @@ myface1 = process_raw_camera_data(webcam_data1);
 
 # ╔═╡ 6224c74b-8915-4983-abf0-30e6ba04a46d
 [
-	myface1              myface1[   :    , end:-1:1]
-	myface1[end:-1:1, :] myface1[end:-1:1, end:-1:1]
+    myface1 myface1[:, end:-1:1]
+    myface1[end:-1:1, :] myface1[end:-1:1, end:-1:1]
 ]
 
 # ╔═╡ 3e0ece65-b8a7-4be7-ae44-6d7210c2e15b
@@ -1067,8 +1074,8 @@ myface = process_raw_camera_data(webcam_data);
 
 # ╔═╡ 4ee18bee-13e6-4478-b2ca-ab66100e57ec
 [
-	myface              myface[   :    , end:-1:1]
-	myface[end:-1:1, :] myface[end:-1:1, end:-1:1]
+    myface myface[:, end:-1:1]
+    myface[end:-1:1, :] myface[end:-1:1, end:-1:1]
 ]
 
 # ╔═╡ 3ef77236-1867-4d02-8af2-ff4777fcd6d9
@@ -1119,31 +1126,32 @@ ct-answer {
 """
 
 # ╔═╡ 61b29e7d-5aba-4bc8-870b-c1c43919c236
-exercise(x, number="") = 
-@htl("""
-	<ct-exercise class="exercise">
-	<h4>Exercise <span>$(number)</span></h4>
-	<section>$(x)
-	</section>
-	</ct-exercise>
-	""")
+exercise(x, number="") =
+    @htl("""
+     <ct-exercise class="exercise">
+     <h4>Exercise <span>$(number)</span></h4>
+     <section>$(x)
+     </section>
+     </ct-exercise>
+     """)
 
 # ╔═╡ a9fef6c9-e911-4d8c-b141-a4832b40a260
-quick_question(x, number, options, correct) = let
-	name = join(rand('a':'z',16))
-@htl("""
-	<ct-exercise class="quick-question">
-	<h4>Quick Question <span>$(number)</span></h4>
-	<section>$(x)
-	<ct-answers>
-	$(map(enumerate(options)) do (i, o)
-		@htl("<ct-answer><input type=radio name=$(name) id=$(i) >$(o)</ct-answer>")
-	end)
-	</ct-answers>
-	</section>
-	</ct-exercise>
-	""")
-end
+quick_question(x, number, options, correct) =
+    let
+        name = join(rand('a':'z', 16))
+        @htl("""
+         <ct-exercise class="quick-question">
+         <h4>Quick Question <span>$(number)</span></h4>
+         <section>$(x)
+         <ct-answers>
+         $(map(enumerate(options)) do (i, o)
+         	@htl("<ct-answer><input type=radio name=$(name) id=$(i) >$(o)</ct-answer>")
+         end)
+         </ct-answers>
+         </section>
+         </ct-exercise>
+         """)
+    end
 
 # ╔═╡ edf900be-601b-11eb-0456-3f7cfc5e876b
 md"_Lecture 1, Spring 2021, version 0_"
@@ -1270,7 +1278,7 @@ uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
 version = "0.8.6"
 
 [[Downloads]]
-deps = ["ArgTools", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 
 [[FileIO]]
@@ -1278,6 +1286,9 @@ deps = ["Pkg", "Requires", "UUIDs"]
 git-tree-sha1 = "9267e5f50b0e12fdfd5a2455534345c4cf2c7f7a"
 uuid = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
 version = "1.14.0"
+
+[[FileWatching]]
+uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[FixedPointNumbers]]
 deps = ["Statistics"]
@@ -1795,10 +1806,12 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─b1dfe122-64dc-11eb-1104-1b8852b2c4c5
 # ╟─cfc55140-64d7-11eb-0ff6-e59c70d01d67
 # ╟─fca72490-64d7-11eb-1464-f5e0582c4d18
-# ╠═88933746-6028-11eb-32de-13eb6ff43e29
 # ╟─1c539b02-64d8-11eb-3505-c9288357d139
 # ╟─10f6e6da-64d8-11eb-366f-11f16e73043b
 # ╟─82a8314c-64d8-11eb-1acb-e33625381178
+# ╠═b470c97d-a914-4750-9dc6-9ce358e23ec4
+# ╠═adad042b-3c2d-4dcf-83fe-327fe299d024
+# ╠═9551e83b-79ee-48e3-a5b5-aceeae2610ef
 # ╟─576d5e3a-64d8-11eb-10c9-876be31f7830
 # ╠═2a94a2cf-b697-4b0b-afd0-af2e35af2bb1
 # ╠═3e0ece65-b8a7-4be7-ae44-6d7210c2e15b
