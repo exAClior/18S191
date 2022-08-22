@@ -16,10 +16,10 @@ end
 
 # ╔═╡ 65780f00-ed6b-11ea-1ecf-8b35523a7ac0
 begin
-	import ImageMagick
-	using Images
-	using PlutoUI
-	using HypertextLiteral
+    import ImageMagick
+    using Images
+    using PlutoUI
+    using HypertextLiteral
 end
 
 # ╔═╡ ac8ff080-ed61-11ea-3650-d9df06123e1f
@@ -40,12 +40,12 @@ Feel free to ask questions!
 # ╔═╡ 911ccbce-ed68-11ea-3606-0384e7580d7c
 # edit the code below to set your name and kerberos ID (i.e. email without @mit.edu)
 
-student = (name = "Jazzy Doe", kerberos_id = "jazz")
+student = (name="Yusheng Zhao", kerberos_id="yushengzhao")
 
 # press the ▶ button in the bottom right of this cell to run your edits
 # or use Shift+Enter
 
-# you might need to wait until all other cells in this notebook have completed running. 
+# you might need to wait until all other cells in this notebook have completed running.
 # scroll down the page to see what's up
 
 # ╔═╡ 8ef13896-ed68-11ea-160b-3550eeabbd7d
@@ -80,12 +80,12 @@ $(html"<br>")
 """
 
 # ╔═╡ f51333a6-eded-11ea-34e6-bfbb3a69bcb0
-random_vect = missing # replace `missing` with your code!
+random_vect = rand(10)# replace `missing` with your code!
 
 # ╔═╡ 5da8cbe8-eded-11ea-2e43-c5b7cc71e133
 begin
-	colored_line(x::Vector) = hcat(Gray.(Float64.(x)))'
-	colored_line(x::Any) = nothing
+    colored_line(x::Vector) = hcat(Gray.(Float64.(x)))'
+    colored_line(x::Any) = nothing
 end
 
 # ╔═╡ 56ced344-eded-11ea-3e81-3936e9ad5777
@@ -100,12 +100,17 @@ md"#### Exerise 1.2
 
 # ╔═╡ bd907ee1-5253-4cae-b5a5-267dac24362a
 function my_sum(xs)
-	# your code here!
-	return missing
+    # your code here!
+    sum = 0
+    for x in xs
+        sum += x
+    end
+
+    return sum
 end
 
 # ╔═╡ 6640110a-d171-4b32-8d12-26979a36b718
-my_sum([1,2,3])
+my_sum([1, 2, 3])
 
 # ╔═╡ cf738088-eded-11ea-2915-61735c2aa990
 md"#### Exerise 1.3
@@ -113,8 +118,8 @@ md"#### Exerise 1.3
 
 # ╔═╡ 0ffa8354-edee-11ea-2883-9d5bfea4a236
 function mean(xs)
-	# your code here!
-	return missing
+    # your code here!
+    return my_sum(xs) / length(xs)
 end
 
 # ╔═╡ 1f104ce4-ee0e-11ea-2029-1d9c817175af
@@ -124,7 +129,7 @@ mean([1, 2, 3])
 md"👉 Define `m` to be the mean of `random_vect`."
 
 # ╔═╡ 2a391708-edee-11ea-124e-d14698171b68
-m = missing # replace `missing` with your code!
+m = mean(random_vect)# replace `missing` with your code!
 
 # ╔═╡ e2863d4c-edef-11ea-1d67-332ddca03cc4
 md"""#### Exerise 1.4
@@ -134,40 +139,41 @@ md"""#### Exerise 1.4
 md"""
 > ### Note about _mutation_
 > There are two ways to think about this exercise, you could _modify_ the original vector, or you can _create a new vector_. We often prefer the second version, so that the original data is preserved. We generally only use code of the first variant in the most performance-sensitive parts of a program, as it requires more care to write and use correctly. _**Be careful not to get carried away in optimizing code**, especially when learning a new language!_
-> 
+>
 > There is a convention among Julians that functions that modify their argument have a `!` in their name. For example, `sort(x)` returns a sorted _copy_ of `x`, while `sort!(x)` _modifies_ `x` to be sorted.
-> 
+>
 > #### Tips for writing non-mutating code
 > 1. _Rewriting_ an existing mutating function to be non-mutating can feel like a 'tedious' and 'inefficient' process. Often, instead of trying to **rewrite** a mutating function, it's best to take a step back and try to think of your problem as _constructing something new_. Instead of a `for` loop, it might make more sense to use **descriptive** primitives like [broadcasting with the dot syntax](https://docs.julialang.org/en/v1/manual/functions/#man-vectorized) (also for [math operators](https://docs.julialang.org/en/v1/manual/mathematical-operations/#man-dot-operators)), and [map and filter](https://www.youtube.com/watch?v=_O-HBDZMLrM).
-> 
-> 
+>
+>
 > 2. If a mutating algorithm makes the most sense for your problem, then you can first use `copy` to create a copy of an array, and then modify that copy.
-> 
+>
 > We will cover this topic more in the later exercises!
 
 """
 
 # ╔═╡ ec5efe8c-edef-11ea-2c6f-afaaeb5bc50c
 function demean(xs)
-	# your code here!
-	return missing
+    # your code here!
+    xs_copy = copy(xs)
+    return xs_copy .- mean(xs)
 end
 
 # ╔═╡ d6ddafdd-1a44-48c7-b49a-554073cdf331
 test_vect = let
-	
-	# feel free to change your test case here!
-	to_create = [-1.0, -1.5, 8.5]
-	
-	
-	####
-	# this cell is a bit funky to deal with a common pitfall from last year
-	# it regenerates the vector if you accidentally wrote a mutating function
-	
-	# don't worry about how it works for this exercise!
-	
-	demean
-	to_create
+
+    # feel free to change your test case here!
+    to_create = [-1.0, -1.5, 8.5]
+
+
+    ####
+    # this cell is a bit funky to deal with a common pitfall from last year
+    # it regenerates the vector if you accidentally wrote a mutating function
+
+    # don't worry about how it works for this exercise!
+
+    demean
+    to_create
 end
 
 # ╔═╡ 29e10640-edf0-11ea-0398-17dbf4242de3
@@ -190,8 +196,10 @@ md"""
 
 # ╔═╡ b6b65b94-edf0-11ea-3686-fbff0ff53d08
 function create_bar()
-	# your code here!
-	return missing
+    # your code here!
+    myVec = zeros(100)
+    myVec[40:60] .= 1
+    return myVec
 end
 
 # ╔═╡ 4a5e9d2c-dd90-4bb0-9e31-3f5c834406b4
@@ -201,7 +209,7 @@ create_bar()
 colored_line(create_bar())
 
 # ╔═╡ 59414833-a108-4b1e-9a34-0f31dc907c6e
-url = "https://user-images.githubusercontent.com/6933510/107239146-dcc3fd00-6a28-11eb-8c7b-41aaf6618935.png" 
+url = "https://user-images.githubusercontent.com/6933510/107239146-dcc3fd00-6a28-11eb-8c7b-41aaf6618935.png"
 
 # ╔═╡ c5484572-ee05-11ea-0424-f37295c3072d
 philip_filename = download(url) # download to a local file. The filename is returned
@@ -229,7 +237,7 @@ Every pixel (i.e. _element of the 2D array_) is of the `RGB` type:
 """
 
 # ╔═╡ c5dc0cc8-9305-47e6-8b20-a9f8ef867799
-philip_pixel = philip[100,100]
+philip_pixel = philip[100, 100]
 
 # ╔═╡ de772e21-0bea-4fd2-868a-9a7d32550bc9
 typeof(philip_pixel)
@@ -258,8 +266,8 @@ md"""
 
 # ╔═╡ a8b2270a-600c-4f83-939e-dc5ab35f4735
 function get_red(pixel::AbstractRGB)
-	# your code here!
-	return missing
+    # your code here!
+    return missing
 end
 
 # ╔═╡ c320b39d-4cea-4fa1-b1ce-053c898a67a6
@@ -273,8 +281,8 @@ md"""
 
 # ╔═╡ ebe1d05c-f6aa-437d-83cb-df0ba30f20bf
 function get_reds(image::AbstractMatrix)
-	# your code here!
-	return missing
+    # your code here!
+    return missing
 end
 
 # ╔═╡ c427554a-6f6a-43f1-b03b-f83239887cee
@@ -295,8 +303,8 @@ First, let's define a function that turns a _number_ into a _color_.
 
 # ╔═╡ 97c15896-6d99-4292-b7d7-4fcd2353656f
 function value_as_color(x)
-	
-	return RGB(x, 0, 0)
+
+    return RGB(x, 0, 0)
 end
 
 # ╔═╡ cbb9bf41-4c21-42c7-b0e0-fc1ce29e0eb1
@@ -330,8 +338,8 @@ md"""
 
 # ╔═╡ f6898df6-ee07-11ea-2838-fde9bc739c11
 function mean_color(image)
-	# your code here!
-	return missing
+    # your code here!
+    return missing
 end
 
 # ╔═╡ 5be9b144-ee0d-11ea-2a8d-8775de265a1d
@@ -344,8 +352,8 @@ _At the end of this homework, you can see all of your filters applied to your we
 
 # ╔═╡ 63e8d636-ee0b-11ea-173d-bd3327347d55
 function invert(color::AbstractRGB)
-	# your code here!
-	return missing
+    # your code here!
+    return missing
 end
 
 # ╔═╡ 2cc2f84e-ee0d-11ea-373b-e7ad3204bb00
@@ -382,8 +390,8 @@ md"""
 
 # ╔═╡ fbd1638d-8d7a-4d12-aff9-9c160cc3fd74
 function quantize(x::Number)
-	# your code here!
-	return missing
+    # your code here!
+    return missing
 end
 
 # ╔═╡ 7720740e-2d2b-47f7-98fd-500ed3eee479
@@ -392,21 +400,21 @@ md"""
 
 In Julia, we often write multiple methods for the same function. When a function is called, the method is chosen based on the input arguments. Let's look at an example:
 
-These are two _methods_ to the same function, because they have 
+These are two _methods_ to the same function, because they have
 
 > **the same name, but different input types**
 """
 
 # ╔═╡ 90421bca-0804-4d6b-8bd0-3ddbd54cc5fe
 function double(x::Number)
-	
-	return x * 2
+
+    return x * 2
 end
 
 # ╔═╡ b2329e4c-6204-453e-8998-2414b869b808
 function double(x::Vector)
-	
-	return [x..., x...]
+
+    return [x..., x...]
 end
 
 # ╔═╡ 23fcd65f-0182-41f3-80ec-d85b05136c47
@@ -418,7 +426,7 @@ When we call the function `double`, Julia will decide which method to call based
 double(24)
 
 # ╔═╡ 8db17b2b-0cf9-40ba-8f6f-2e53be7b6355
-double([1,2,37])
+double([1, 2, 37])
 
 # ╔═╡ a8a597e0-a01c-40cd-9902-d56430afd938
 md"""
@@ -428,8 +436,8 @@ We call this **multiple dispatch**, and it is one of Julia's key features. Throu
 # ╔═╡ f6b218c0-ee07-11ea-2adb-1968c4fd473a
 md"""
 #### Exercise 3.3
-👉 Write the second **method** of the function `quantize`, i.e. a new *version* of the function with the *same* name. This method will accept a color object called `color`, of the type `AbstractRGB`. 
-    
+👉 Write the second **method** of the function `quantize`, i.e. a new *version* of the function with the *same* name. This method will accept a color object called `color`, of the type `AbstractRGB`.
+
 Here, `::AbstractRGB` is a **type annotation**. This ensures that this version of the function will be chosen when passing in an object whose type is a **subtype** of the `AbstractRGB` abstract type. For example, both the `RGB` and `RGBX` types satisfy this.
 
 The method you write should return a new `RGB` object, in which each component ($r$, $g$ and $b$) are quantized. Use your previous method for `quantize`!
@@ -437,8 +445,8 @@ The method you write should return a new `RGB` object, in which each component (
 
 # ╔═╡ 04e6b486-ceb7-45fe-a6ca-733703f16357
 function quantize(color::AbstractRGB)
-	# your code here!
-	return missing
+    # your code here!
+    return missing
 end
 
 # ╔═╡ f6bf64da-ee07-11ea-3efb-05af01b14f67
@@ -449,8 +457,8 @@ md"""
 
 # ╔═╡ 13e9ec8d-f615-4833-b1cf-0153010ccb65
 function quantize(image::AbstractMatrix)
-	# your code here!
-	return missing
+    # your code here!
+    return missing
 end
 
 # ╔═╡ f6a655f8-ee07-11ea-13b6-43ca404ddfc7
@@ -470,21 +478,21 @@ md"""
 
 # ╔═╡ f38b198d-39cf-456f-a841-1ba08f206010
 function noisify(x::Number, s)
-	# your code here!
-	return missing
+    # your code here!
+    return missing
 end
 
 # ╔═╡ f6fc1312-ee07-11ea-39a0-299b67aee3d8
 md"""
-👉  Write the second method `noisify(c::AbstractRGB, s)` to add random noise of intensity $s$ to each of the $(r, g, b)$ values in a colour. 
+👉  Write the second method `noisify(c::AbstractRGB, s)` to add random noise of intensity $s$ to each of the $(r, g, b)$ values in a colour.
 
 Use your previous method for `noisify`. _(Remember that Julia chooses which method to use based on the input arguments. So to call the method from the previous exercise, the first argument should be a number.)_
 """
 
 # ╔═╡ db4bad9f-df1c-4640-bb34-dd2fe9bdce18
 function noisify(color::AbstractRGB, s)
-	# your code here!
-	return missing
+    # your code here!
+    return missing
 end
 
 # ╔═╡ 0000b7f8-4c43-4dd8-8665-0dfe59e74c0a
@@ -517,8 +525,8 @@ md"""
 
 # ╔═╡ 21a5885d-00ab-428b-96c3-c28c98c4ca6d
 function noisify(image::AbstractMatrix, s)
-	# your code here!
-	return missing
+    # your code here!
+    return missing
 end
 
 # ╔═╡ 1ea53f41-b791-40e2-a0f8-04e13d856829
@@ -529,10 +537,10 @@ noisify(0.5, 0.1) # edit this test case!
 
 # ╔═╡ 8e848279-1b3e-4f32-8c0c-45693d12de96
 [
-	noisify(color_red, strength)
-	for 
-		strength in 0 : 0.05 : 1,
-		row in 1:10
+    noisify(color_red, strength)
+    for
+    strength in 0:0.05:1,
+    row in 1:10
 ]'
 
 # ╔═╡ d896b7fd-20db-4aa9-bbcf-81b1cd44ec46
@@ -550,18 +558,18 @@ noisify(philip_head, philip_noise)
 
 # ╔═╡ 9604bc44-ee1b-11ea-28f8-7f7af8d0cbb2
 if philip_noise == 1
-	md"""
-	> #### What's this?
-	> 
-	> The noise intensity is `1.0`, but we can still recognise Philip in the picture... 
-	> 
-	> 👉 Modify the definition of the slider to go further than `1.0`.
-	"""
+    md"""
+    > #### What's this?
+    >
+    > The noise intensity is `1.0`, but we can still recognise Philip in the picture...
+    >
+    > 👉 Modify the definition of the slider to go further than `1.0`.
+    """
 end
 
 # ╔═╡ f714699e-ee07-11ea-08b6-5f5169861b57
 md"""
-👉 For which noise intensity does it become unrecognisable? 
+👉 For which noise intensity does it become unrecognisable?
 
 You may need noise intensities larger than 1. Why?
 
@@ -579,24 +587,24 @@ md"""
 
 # ╔═╡ ee5f21fb-1076-42b6-8926-8bbb6ed0ad67
 function custom_filter(pixel::AbstractRGB)
-	
-	# your code here!
-	
-	return pixel
+
+    # your code here!
+
+    return pixel
 end
 
 # ╔═╡ 9e5a08dd-332a-486b-94ab-15c49e72e522
 function custom_filter(image::AbstractMatrix)
-	
-	return custom_filter.(image)
+
+    return custom_filter.(image)
 end
 
 # ╔═╡ 8ffe16ce-ee20-11ea-18bd-15640f94b839
 if student.kerberos_id === "jazz"
-	md"""
-!!! danger "Oops!"
-    **Before you submit**, remember to fill in your name and kerberos ID at the top of this notebook!
-	"""
+    md"""
+   !!! danger "Oops!"
+       **Before you submit**, remember to fill in your name and kerberos ID at the top of this notebook!
+   	"""
 end
 
 # ╔═╡ 756d150a-b7bf-4bf5-b372-5b0efa80d987
@@ -629,8 +637,8 @@ Try the following:
 
 # ╔═╡ 24090306-7395-4f2f-af31-34f7486f3945
 hint(md"""Check out this page for a refresher on basic Julia syntax:
-	
-	[Basic Julia Syntax](https://computationalthinking.mit.edu/Spring21/basic_syntax/)""")
+
+ [Basic Julia Syntax](https://computationalthinking.mit.edu/Spring21/basic_syntax/)""")
 
 # ╔═╡ aa1ff74a-4e78-4ef1-8b8d-3a60a168cf6d
 hint(md"""
@@ -639,7 +647,7 @@ In [Section 1.1](https://computationalthinking.mit.edu/Spring21/week1/), we drew
 
 # ╔═╡ 50e2b0fb-b06d-4ac1-bdfb-eab833466736
 md"""
-This exercise can be quite difficult if you use a `for` loop or list comprehension. 
+This exercise can be quite difficult if you use a `for` loop or list comprehension.
 
 Instead, you should use the [dot syntax](https://docs.julialang.org/en/v1/manual/functions/#man-vectorized) to apply a function _element-wise_ to an array. For example, this is how you get the square root of `3`:
 
@@ -675,96 +683,96 @@ correct(text=rand(yays)) = Markdown.MD(Markdown.Admonition("correct", "Got it!",
 
 # ╔═╡ 09102183-f9fb-4d89-b4f9-5d76af7b8e90
 let
-	result = get_red(RGB(0.2, 0.3, 0.4))
-	if ismissing(result)
-		still_missing()
-	elseif isnothing(result)
-		keep_working(md"Did you forget to write `return`?")
-	elseif result == 0.2
-		correct()
-	else
-		keep_working()
-	end
+    result = get_red(RGB(0.2, 0.3, 0.4))
+    if ismissing(result)
+        still_missing()
+    elseif isnothing(result)
+        keep_working(md"Did you forget to write `return`?")
+    elseif result == 0.2
+        correct()
+    else
+        keep_working()
+    end
 end
 
 # ╔═╡ 63ac142e-6d9d-4109-9286-030a02c900b4
 let
-	test = [RGB(0.2, 0, 0)   RGB(0.6, 0, 0)]
-	result = get_reds(test)
-	
-	if ismissing(result)
-		still_missing()
-	elseif isnothing(result)
-		keep_working(md"Did you forget to write `return`?")
-	elseif result == [ 0.2  0.6 ]
-		correct()
-	else
-		keep_working()
-	end
+    test = [RGB(0.2, 0, 0) RGB(0.6, 0, 0)]
+    result = get_reds(test)
+
+    if ismissing(result)
+        still_missing()
+    elseif isnothing(result)
+        keep_working(md"Did you forget to write `return`?")
+    elseif result == [0.2 0.6]
+        correct()
+    else
+        keep_working()
+    end
 end
 
 # ╔═╡ 80a4cb23-49c9-4446-a3ec-b2203128dc27
 let
-	result = invert(RGB(1.0, 0.5, 0.25)) # I chose these values because they can be represented exactly by Float64
-	shouldbe = RGB(0.0, 0.5, 0.75)
-	
-	if ismissing(result)
-		still_missing()
-	elseif isnothing(result)
-		keep_working(md"Did you forget to write `return`?")
-	elseif !(result isa AbstractRGB)
-		keep_working(md"You need to return a _color_, i.e. an object of type `RGB`. Use `RGB(r, g, b)` to create a color with channel values `r`, `g` and `b`.")
-	elseif !(result == shouldbe)
-		keep_working()
-	else
-		correct()
-	end
+    result = invert(RGB(1.0, 0.5, 0.25)) # I chose these values because they can be represented exactly by Float64
+    shouldbe = RGB(0.0, 0.5, 0.75)
+
+    if ismissing(result)
+        still_missing()
+    elseif isnothing(result)
+        keep_working(md"Did you forget to write `return`?")
+    elseif !(result isa AbstractRGB)
+        keep_working(md"You need to return a _color_, i.e. an object of type `RGB`. Use `RGB(r, g, b)` to create a color with channel values `r`, `g` and `b`.")
+    elseif !(result == shouldbe)
+        keep_working()
+    else
+        correct()
+    end
 end
 
 # ╔═╡ a6d9635b-85ed-4590-ad09-ca2903ea8f1d
 let
-	result = quantize(RGB(.297, .1, .0))
+    result = quantize(RGB(0.297, 0.1, 0.0))
 
-	if ismissing(result)
-		still_missing()
-	elseif isnothing(result)
-		keep_working(md"Did you forget to write `return`?")
-	elseif !(result isa AbstractRGB)
-		keep_working(md"You need to return a _color_, i.e. an object of type `RGB`. Use `RGB(r, g, b)` to create a color with channel values `r`, `g` and `b`.")
-	elseif result != RGB(0.2, .1, .0)
-		keep_working()
-	else
-		correct()
-	end
+    if ismissing(result)
+        still_missing()
+    elseif isnothing(result)
+        keep_working(md"Did you forget to write `return`?")
+    elseif !(result isa AbstractRGB)
+        keep_working(md"You need to return a _color_, i.e. an object of type `RGB`. Use `RGB(r, g, b)` to create a color with channel values `r`, `g` and `b`.")
+    elseif result != RGB(0.2, 0.1, 0.0)
+        keep_working()
+    else
+        correct()
+    end
 end
 
 # ╔═╡ 31ef3710-e4c9-4aa7-bd8f-c69cc9a977ee
 let
-	result = noisify(0.5, 0)
+    result = noisify(0.5, 0)
 
-	if ismissing(result)
-		still_missing()
-	elseif isnothing(result)
-		keep_working(md"Did you forget to write `return`?")
-	elseif result == 0.5
-		
-		results = [noisify(0.9, 0.1) for _ in 1:1000]
-		
-		if 0.8 ≤ minimum(results) < 0.81 && 0.99 ≤ maximum(results) ≤ 1
-			result = noisify(5, 3)
-			
-			if result == 1
-				correct()
-			else
-				keep_working(md"The result should be restricted to the range ``[0,1]``.")
-			end
-		else
-			keep_working()
-		end
-	else
-		keep_working(md"What should `noisify(0.5, 0)` be?")
-		correct()
-	end
+    if ismissing(result)
+        still_missing()
+    elseif isnothing(result)
+        keep_working(md"Did you forget to write `return`?")
+    elseif result == 0.5
+
+        results = [noisify(0.9, 0.1) for _ in 1:1000]
+
+        if 0.8 ≤ minimum(results) < 0.81 && 0.99 ≤ maximum(results) ≤ 1
+            result = noisify(5, 3)
+
+            if result == 1
+                correct()
+            else
+                keep_working(md"The result should be restricted to the range ``[0,1]``.")
+            end
+        else
+            keep_working()
+        end
+    else
+        keep_working(md"What should `noisify(0.5, 0)` be?")
+        correct()
+    end
 end
 
 # ╔═╡ ab3d1b70-88e8-4118-8d3e-601a8a68f72d
@@ -772,174 +780,174 @@ not_defined(variable_name) = Markdown.MD(Markdown.Admonition("danger", "Oopsie!"
 
 # ╔═╡ 397941fc-edee-11ea-33f2-5d46c759fbf7
 if !@isdefined(random_vect)
-	not_defined(:random_vect)
+    not_defined(:random_vect)
 elseif ismissing(random_vect)
-	still_missing()
+    still_missing()
 elseif !(random_vect isa Vector)
-	keep_working(md"`random_vect` should be a `Vector`.")
+    keep_working(md"`random_vect` should be a `Vector`.")
 elseif eltype(random_vect) != Float64
-	almost(md"""
-		You generated a vector of random integers. For the remaining exercises, we want a vector of `Float64` numbers. 
-		
-		The (optional) first argument to `rand` specifies the **type** of elements to generate. For example: `rand(Bool, 10)` generates 10 values that are either `true` or `false`. (Try it!)
-		""")
+    almost(md"""
+     You generated a vector of random integers. For the remaining exercises, we want a vector of `Float64` numbers.
+
+     The (optional) first argument to `rand` specifies the **type** of elements to generate. For example: `rand(Bool, 10)` generates 10 values that are either `true` or `false`. (Try it!)
+     """)
 elseif length(random_vect) != 10
-	keep_working(md"`random_vect` does not have the correct size.")
+    keep_working(md"`random_vect` does not have the correct size.")
 elseif length(Set(random_vect)) != 10
-	keep_working(md"`random_vect` is not 'random enough'")
+    keep_working(md"`random_vect` is not 'random enough'")
 else
-	correct(md"Well done! You can run your code again to generate a new vector!")
+    correct(md"Well done! You can run your code again to generate a new vector!")
 end
 
 # ╔═╡ e0bfc973-2808-4f84-b065-fb3d05401e30
 if !@isdefined(my_sum)
-	not_defined(:my_sum)
+    not_defined(:my_sum)
 else
-	let
-		result = my_sum([1,2,3])
-		if ismissing(result)
-			still_missing()
-		elseif isnothing(result)
-			keep_working(md"Did you forget to write `return`?")
-		elseif result != 6
-			keep_working()
-		else
-			correct()
-		end
-	end
+    let
+        result = my_sum([1, 2, 3])
+        if ismissing(result)
+            still_missing()
+        elseif isnothing(result)
+            keep_working(md"Did you forget to write `return`?")
+        elseif result != 6
+            keep_working()
+        else
+            correct()
+        end
+    end
 end
 
 # ╔═╡ 38dc80a0-edef-11ea-10e9-615255a4588c
 if !@isdefined(mean)
-	not_defined(:mean)
+    not_defined(:mean)
 else
-	let
-		result = mean([1,2,3])
-		if ismissing(result)
-			still_missing()
-		elseif isnothing(result)
-			keep_working(md"Did you forget to write `return`?")
-		elseif result != 2
-			keep_working()
-		else
-			correct()
-		end
-	end
+    let
+        result = mean([1, 2, 3])
+        if ismissing(result)
+            still_missing()
+        elseif isnothing(result)
+            keep_working(md"Did you forget to write `return`?")
+        elseif result != 2
+            keep_working()
+        else
+            correct()
+        end
+    end
 end
 
 # ╔═╡ 2b1ccaca-edee-11ea-34b0-c51659f844d0
 if !@isdefined(m)
-	not_defined(:m)
+    not_defined(:m)
 elseif ismissing(m)
-	still_missing()
+    still_missing()
 elseif !(m isa Number)
-	keep_working(md"`m` should be a number.")
+    keep_working(md"`m` should be a number.")
 elseif m != mean(random_vect)
-	keep_working()
+    keep_working()
 else
-	correct()
+    correct()
 end
 
 # ╔═╡ adf476d8-a334-4b35-81e8-cc3b37de1f28
 if !@isdefined(mean)
-	not_defined(:mean)
+    not_defined(:mean)
 else
-	let
-		input = Float64[1,2,3]
-		result = demean(input)
-		
-		if input === result
-			almost(md"""
-			It looks like you **modified** `xs` inside the function.
-			
-			It is preferable to avoid mutation inside functions, because you might want to use the original data again. For example, applying `demean` to a dataset of sensor readings would **modify** the original data, and the rest of your analysis would be erroneous.
-			
-			""")
-		elseif ismissing(result)
-			still_missing()
-		elseif isnothing(result)
-			keep_working(md"Did you forget to write `return`?")
-		elseif !(result isa AbstractVector) || length(result) != 3
-			keep_working(md"Return a vector of the same size as `xs`.")
-		elseif abs(sum(result) / 3) < 1e-10
-			correct()
-		else
-			keep_working()
-		end
-	end
+    let
+        input = Float64[1, 2, 3]
+        result = demean(input)
+
+        if input === result
+            almost(md"""
+            It looks like you **modified** `xs` inside the function.
+
+            It is preferable to avoid mutation inside functions, because you might want to use the original data again. For example, applying `demean` to a dataset of sensor readings would **modify** the original data, and the rest of your analysis would be erroneous.
+
+            """)
+        elseif ismissing(result)
+            still_missing()
+        elseif isnothing(result)
+            keep_working(md"Did you forget to write `return`?")
+        elseif !(result isa AbstractVector) || length(result) != 3
+            keep_working(md"Return a vector of the same size as `xs`.")
+        elseif abs(sum(result) / 3) < 1e-10
+            correct()
+        else
+            keep_working()
+        end
+    end
 end
 
 # ╔═╡ e3394c8a-edf0-11ea-1bb8-619f7abb6881
 if !@isdefined(create_bar)
-	not_defined(:create_bar)
+    not_defined(:create_bar)
 else
-	let
-		result = create_bar()
-		if ismissing(result)
-			still_missing()
-		elseif isnothing(result)
-			keep_working(md"Did you forget to write `return`?")
-		elseif !(result isa Vector) || length(result) != 100
-			keep_working(md"The result should be a `Vector` with 100 elements.")
-		elseif result[[1,50,100]] != [0,1,0]
-			keep_working()
-		else
-			correct()
-		end
-	end
+    let
+        result = create_bar()
+        if ismissing(result)
+            still_missing()
+        elseif isnothing(result)
+            keep_working(md"Did you forget to write `return`?")
+        elseif !(result isa Vector) || length(result) != 100
+            keep_working(md"The result should be a `Vector` with 100 elements.")
+        elseif result[[1, 50, 100]] != [0, 1, 0]
+            keep_working()
+        else
+            correct()
+        end
+    end
 end
 
 # ╔═╡ 4d0158d0-ee0d-11ea-17c3-c169d4284acb
 if !@isdefined(mean_color)
-	not_defined(:mean_color)
+    not_defined(:mean_color)
 else
-	let
-		input = reshape([RGB(1.0, 1.0, 1.0), RGB(1.0, 1.0, 0.0)], (2, 1))
-		
-		result = mean_color(input)
-		shouldbe = RGB(1.0, 1.0, 0.5)
+    let
+        input = reshape([RGB(1.0, 1.0, 1.0), RGB(1.0, 1.0, 0.0)], (2, 1))
 
-		if ismissing(result)
-			still_missing()
-		elseif isnothing(result)
-			keep_working(md"Did you forget to write `return`?")
-		elseif !(result isa AbstractRGB)
-			keep_working(md"You need to return a _color_, i.e. an object of type `RGB`. Use `RGB(r, g, b)` to create a color with channel values `r`, `g` and `b`.")
-		elseif !(result == shouldbe)
-			keep_working()
-		else
-			correct()
-		end
-	end
+        result = mean_color(input)
+        shouldbe = RGB(1.0, 1.0, 0.5)
+
+        if ismissing(result)
+            still_missing()
+        elseif isnothing(result)
+            keep_working(md"Did you forget to write `return`?")
+        elseif !(result isa AbstractRGB)
+            keep_working(md"You need to return a _color_, i.e. an object of type `RGB`. Use `RGB(r, g, b)` to create a color with channel values `r`, `g` and `b`.")
+        elseif !(result == shouldbe)
+            keep_working()
+        else
+            correct()
+        end
+    end
 end
 
 # ╔═╡ c905b73e-ee1a-11ea-2e36-23b8e73bfdb6
 if !@isdefined(quantize)
-	not_defined(:quantize)
+    not_defined(:quantize)
 else
-	let
-		result = quantize(.3)
+    let
+        result = quantize(0.3)
 
-		if ismissing(result)
-			still_missing()
-		elseif isnothing(result)
-			keep_working(md"Did you forget to write `return`?")
-		elseif result != .3
-			if quantize(0.35) == .3
-				almost(md"What should quantize(`0.2`) be?")
-			else
-				keep_working()
-			end
-		else
-			correct()
-		end
-	end
+        if ismissing(result)
+            still_missing()
+        elseif isnothing(result)
+            keep_working(md"Did you forget to write `return`?")
+        elseif result != 0.3
+            if quantize(0.35) == 0.3
+                almost(md"What should quantize(`0.2`) be?")
+            else
+                keep_working()
+            end
+        else
+            correct()
+        end
+    end
 end
 
 # ╔═╡ 8cb0aee8-5774-4490-9b9e-ada93416c089
 todo(text) = HTML("""<div
-	style="background: rgb(220, 200, 255); padding: 2em; border-radius: 1em;"
-	><h1>TODO</h1>$(repr(MIME"text/html"(), text))</div>""")
+ style="background: rgb(220, 200, 255); padding: 2em; border-radius: 1em;"
+ ><h1>TODO</h1>$(repr(MIME"text/html"(), text))</div>""")
 
 # ╔═╡ 115ded8c-ee0a-11ea-3493-89487315feb7
 bigbreak = html"<br><br><br><br><br>";
@@ -990,207 +998,207 @@ bigbreak
 bigbreak
 
 # ╔═╡ dfb7c6be-ee0d-11ea-194e-9758857f7b20
-function camera_input(;max_size=200, default_url="https://i.imgur.com/SUmi94P.png")
-"""
-<span class="pl-image waiting-for-permission">
-<style>
-	
-	.pl-image.popped-out {
-		position: fixed;
-		top: 0;
-		right: 0;
-		z-index: 5;
-	}
+function camera_input(; max_size=200, default_url="https://i.imgur.com/SUmi94P.png")
+    """
+    <span class="pl-image waiting-for-permission">
+    <style>
 
-	.pl-image #video-container {
-		width: 250px;
-	}
+    	.pl-image.popped-out {
+    		position: fixed;
+    		top: 0;
+    		right: 0;
+    		z-index: 5;
+    	}
 
-	.pl-image video {
-		border-radius: 1rem 1rem 0 0;
-	}
-	.pl-image.waiting-for-permission #video-container {
-		display: none;
-	}
-	.pl-image #prompt {
-		display: none;
-	}
-	.pl-image.waiting-for-permission #prompt {
-		width: 250px;
-		height: 200px;
-		display: grid;
-		place-items: center;
-		font-family: monospace;
-		font-weight: bold;
-		text-decoration: underline;
-		cursor: pointer;
-		border: 5px dashed rgba(0,0,0,.5);
-	}
+    	.pl-image #video-container {
+    		width: 250px;
+    	}
 
-	.pl-image video {
-		display: block;
-	}
-	.pl-image .bar {
-		width: inherit;
-		display: flex;
-		z-index: 6;
-	}
-	.pl-image .bar#top {
-		position: absolute;
-		flex-direction: column;
-	}
-	
-	.pl-image .bar#bottom {
-		background: black;
-		border-radius: 0 0 1rem 1rem;
-	}
-	.pl-image .bar button {
-		flex: 0 0 auto;
-		background: rgba(255,255,255,.8);
-		border: none;
-		width: 2rem;
-		height: 2rem;
-		border-radius: 100%;
-		cursor: pointer;
-		z-index: 7;
-	}
-	.pl-image .bar button#shutter {
-		width: 3rem;
-		height: 3rem;
-		margin: -1.5rem auto .2rem auto;
-	}
+    	.pl-image video {
+    		border-radius: 1rem 1rem 0 0;
+    	}
+    	.pl-image.waiting-for-permission #video-container {
+    		display: none;
+    	}
+    	.pl-image #prompt {
+    		display: none;
+    	}
+    	.pl-image.waiting-for-permission #prompt {
+    		width: 250px;
+    		height: 200px;
+    		display: grid;
+    		place-items: center;
+    		font-family: monospace;
+    		font-weight: bold;
+    		text-decoration: underline;
+    		cursor: pointer;
+    		border: 5px dashed rgba(0,0,0,.5);
+    	}
 
-	.pl-image video.takepicture {
-		animation: pictureflash 200ms linear;
-	}
+    	.pl-image video {
+    		display: block;
+    	}
+    	.pl-image .bar {
+    		width: inherit;
+    		display: flex;
+    		z-index: 6;
+    	}
+    	.pl-image .bar#top {
+    		position: absolute;
+    		flex-direction: column;
+    	}
 
-	@keyframes pictureflash {
-		0% {
-			filter: grayscale(1.0) contrast(2.0);
-		}
+    	.pl-image .bar#bottom {
+    		background: black;
+    		border-radius: 0 0 1rem 1rem;
+    	}
+    	.pl-image .bar button {
+    		flex: 0 0 auto;
+    		background: rgba(255,255,255,.8);
+    		border: none;
+    		width: 2rem;
+    		height: 2rem;
+    		border-radius: 100%;
+    		cursor: pointer;
+    		z-index: 7;
+    	}
+    	.pl-image .bar button#shutter {
+    		width: 3rem;
+    		height: 3rem;
+    		margin: -1.5rem auto .2rem auto;
+    	}
 
-		100% {
-			filter: grayscale(0.0) contrast(1.0);
-		}
-	}
-</style>
+    	.pl-image video.takepicture {
+    		animation: pictureflash 200ms linear;
+    	}
 
-	<div id="video-container">
-		<div id="top" class="bar">
-			<button id="stop" title="Stop video">✖</button>
-			<button id="pop-out" title="Pop out/pop in">⏏</button>
-		</div>
-		<video playsinline autoplay></video>
-		<div id="bottom" class="bar">
-		<button id="shutter" title="Click to take a picture">📷</button>
-		</div>
-	</div>
-		
-	<div id="prompt">
-		<span>
-		Enable webcam
-		</span>
-	</div>
+    	@keyframes pictureflash {
+    		0% {
+    			filter: grayscale(1.0) contrast(2.0);
+    		}
 
-<script>
-	// based on https://github.com/fonsp/printi-static (by the same author)
+    		100% {
+    			filter: grayscale(0.0) contrast(1.0);
+    		}
+    	}
+    </style>
 
-	const span = currentScript.parentElement
-	const video = span.querySelector("video")
-	const popout = span.querySelector("button#pop-out")
-	const stop = span.querySelector("button#stop")
-	const shutter = span.querySelector("button#shutter")
-	const prompt = span.querySelector(".pl-image #prompt")
+    	<div id="video-container">
+    		<div id="top" class="bar">
+    			<button id="stop" title="Stop video">✖</button>
+    			<button id="pop-out" title="Pop out/pop in">⏏</button>
+    		</div>
+    		<video playsinline autoplay></video>
+    		<div id="bottom" class="bar">
+    		<button id="shutter" title="Click to take a picture">📷</button>
+    		</div>
+    	</div>
 
-	const maxsize = $(max_size)
+    	<div id="prompt">
+    		<span>
+    		Enable webcam
+    		</span>
+    	</div>
 
-	const send_source = (source, src_width, src_height) => {
-		const scale = Math.min(1.0, maxsize / src_width, maxsize / src_height)
+    <script>
+    	// based on https://github.com/fonsp/printi-static (by the same author)
 
-		const width = Math.floor(src_width * scale)
-		const height = Math.floor(src_height * scale)
+    	const span = currentScript.parentElement
+    	const video = span.querySelector("video")
+    	const popout = span.querySelector("button#pop-out")
+    	const stop = span.querySelector("button#stop")
+    	const shutter = span.querySelector("button#shutter")
+    	const prompt = span.querySelector(".pl-image #prompt")
 
-		const canvas = html`<canvas width=\${width} height=\${height}>`
-		const ctx = canvas.getContext("2d")
-		ctx.drawImage(source, 0, 0, width, height)
+    	const maxsize = $(max_size)
 
-		span.value = {
-			width: width,
-			height: height,
-			data: ctx.getImageData(0, 0, width, height).data,
-		}
-		span.dispatchEvent(new CustomEvent("input"))
-	}
-	
-	const clear_camera = () => {
-		window.stream.getTracks().forEach(s => s.stop());
-		video.srcObject = null;
+    	const send_source = (source, src_width, src_height) => {
+    		const scale = Math.min(1.0, maxsize / src_width, maxsize / src_height)
 
-		span.classList.add("waiting-for-permission");
-	}
+    		const width = Math.floor(src_width * scale)
+    		const height = Math.floor(src_height * scale)
 
-	prompt.onclick = () => {
-		navigator.mediaDevices.getUserMedia({
-			audio: false,
-			video: {
-				facingMode: "environment",
-			},
-		}).then(function(stream) {
+    		const canvas = html`<canvas width=\${width} height=\${height}>`
+    		const ctx = canvas.getContext("2d")
+    		ctx.drawImage(source, 0, 0, width, height)
 
-			stream.onend = console.log
+    		span.value = {
+    			width: width,
+    			height: height,
+    			data: ctx.getImageData(0, 0, width, height).data,
+    		}
+    		span.dispatchEvent(new CustomEvent("input"))
+    	}
 
-			window.stream = stream
-			video.srcObject = stream
-			window.cameraConnected = true
-			video.controls = false
-			video.play()
-			video.controls = false
+    	const clear_camera = () => {
+    		window.stream.getTracks().forEach(s => s.stop());
+    		video.srcObject = null;
 
-			span.classList.remove("waiting-for-permission");
+    		span.classList.add("waiting-for-permission");
+    	}
 
-		}).catch(function(error) {
-			console.log(error)
-		});
-	}
-	stop.onclick = () => {
-		clear_camera()
-	}
-	popout.onclick = () => {
-		span.classList.toggle("popped-out")
-	}
+    	prompt.onclick = () => {
+    		navigator.mediaDevices.getUserMedia({
+    			audio: false,
+    			video: {
+    				facingMode: "environment",
+    			},
+    		}).then(function(stream) {
 
-	shutter.onclick = () => {
-		const cl = video.classList
-		cl.remove("takepicture")
-		void video.offsetHeight
-		cl.add("takepicture")
-		video.play()
-		video.controls = false
-		console.log(video)
-		send_source(video, video.videoWidth, video.videoHeight)
-	}
-	
-	
-	document.addEventListener("visibilitychange", () => {
-		if (document.visibilityState != "visible") {
-			clear_camera()
-		}
-	})
+    			stream.onend = console.log
+
+    			window.stream = stream
+    			video.srcObject = stream
+    			window.cameraConnected = true
+    			video.controls = false
+    			video.play()
+    			video.controls = false
+
+    			span.classList.remove("waiting-for-permission");
+
+    		}).catch(function(error) {
+    			console.log(error)
+    		});
+    	}
+    	stop.onclick = () => {
+    		clear_camera()
+    	}
+    	popout.onclick = () => {
+    		span.classList.toggle("popped-out")
+    	}
+
+    	shutter.onclick = () => {
+    		const cl = video.classList
+    		cl.remove("takepicture")
+    		void video.offsetHeight
+    		cl.add("takepicture")
+    		video.play()
+    		video.controls = false
+    		console.log(video)
+    		send_source(video, video.videoWidth, video.videoHeight)
+    	}
 
 
-	// Set a default image
+    	document.addEventListener("visibilitychange", () => {
+    		if (document.visibilityState != "visible") {
+    			clear_camera()
+    		}
+    	})
 
-	const img = html`<img crossOrigin="anonymous">`
 
-	img.onload = () => {
-	console.log("helloo")
-		send_source(img, img.width, img.height)
-	}
-	img.src = "$(default_url)"
-	console.log(img)
-</script>
-</span>
-""" |> HTML
+    	// Set a default image
+
+    	const img = html`<img crossOrigin="anonymous">`
+
+    	img.onload = () => {
+    	console.log("helloo")
+    		send_source(img, img.width, img.height)
+    	}
+    	img.src = "$(default_url)"
+    	console.log(img)
+    </script>
+    </span>
+    """ |> HTML
 end
 
 # ╔═╡ 20402780-426b-4caa-af8f-ff1e7787b7f9
@@ -1199,36 +1207,36 @@ end
 # ╔═╡ e15ad330-ee0d-11ea-25b6-1b1b3f3d7888
 
 function process_raw_camera_data(raw_camera_data)
-	# the raw image data is a long byte array, we need to transform it into something
-	# more "Julian" - something with more _structure_.
-	
-	# The encoding of the raw byte stream is:
-	# every 4 bytes is a single pixel
-	# every pixel has 4 values: Red, Green, Blue, Alpha
-	# (we ignore alpha for this notebook)
-	
-	# So to get the red values for each pixel, we take every 4th value, starting at 
-	# the 1st:
-	reds_flat = UInt8.(raw_camera_data["data"][1:4:end])
-	greens_flat = UInt8.(raw_camera_data["data"][2:4:end])
-	blues_flat = UInt8.(raw_camera_data["data"][3:4:end])
-	
-	# but these are still 1-dimensional arrays, nicknamed 'flat' arrays
-	# We will 'reshape' this into 2D arrays:
-	
-	width = raw_camera_data["width"]
-	height = raw_camera_data["height"]
-	
-	# shuffle and flip to get it in the right shape
-	reds = reshape(reds_flat, (width, height))' / 255.0
-	greens = reshape(greens_flat, (width, height))' / 255.0
-	blues = reshape(blues_flat, (width, height))' / 255.0
-	
-	# we have our 2D array for each color
-	# Let's create a single 2D array, where each value contains the R, G and B value of 
-	# that pixel
-	
-	RGB.(reds, greens, blues)
+    # the raw image data is a long byte array, we need to transform it into something
+    # more "Julian" - something with more _structure_.
+
+    # The encoding of the raw byte stream is:
+    # every 4 bytes is a single pixel
+    # every pixel has 4 values: Red, Green, Blue, Alpha
+    # (we ignore alpha for this notebook)
+
+    # So to get the red values for each pixel, we take every 4th value, starting at
+    # the 1st:
+    reds_flat = UInt8.(raw_camera_data["data"][1:4:end])
+    greens_flat = UInt8.(raw_camera_data["data"][2:4:end])
+    blues_flat = UInt8.(raw_camera_data["data"][3:4:end])
+
+    # but these are still 1-dimensional arrays, nicknamed 'flat' arrays
+    # We will 'reshape' this into 2D arrays:
+
+    width = raw_camera_data["width"]
+    height = raw_camera_data["height"]
+
+    # shuffle and flip to get it in the right shape
+    reds = reshape(reds_flat, (width, height))' / 255.0
+    greens = reshape(greens_flat, (width, height))' / 255.0
+    blues = reshape(blues_flat, (width, height))' / 255.0
+
+    # we have our 2D array for each color
+    # Let's create a single 2D array, where each value contains the R, G and B value of
+    # that pixel
+
+    RGB.(reds, greens, blues)
 end
 
 # ╔═╡ ed9fb2ac-2680-42b7-9b00-591e45a5e105
@@ -1244,12 +1252,12 @@ invert.(cam_image)
 quantize(cam_image)
 
 # ╔═╡ 18e781f8-66f3-4216-bc84-076a08f9f3fb
-noisify(cam_image, .5)
+noisify(cam_image, 0.5)
 
 # ╔═╡ ebf3193d-8c8d-4425-b252-45067a5851d9
 [
-	invert.(cam_image)      quantize(cam_image)
-	noisify(cam_image, .5)  custom_filter(cam_image)
+    invert.(cam_image) quantize(cam_image)
+    noisify(cam_image, 0.5) custom_filter(cam_image)
 ]
 
 # ╔═╡ 8917529e-fa7a-412b-8aea-54f92f6270fa
