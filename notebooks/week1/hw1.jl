@@ -266,8 +266,7 @@ md"""
 
 # ╔═╡ a8b2270a-600c-4f83-939e-dc5ab35f4735
 function get_red(pixel::AbstractRGB)
-    # your code here!
-    return missing
+    return pixel.r
 end
 
 # ╔═╡ c320b39d-4cea-4fa1-b1ce-053c898a67a6
@@ -281,8 +280,9 @@ md"""
 
 # ╔═╡ ebe1d05c-f6aa-437d-83cb-df0ba30f20bf
 function get_reds(image::AbstractMatrix)
-    # your code here!
-    return missing
+    # list comprehension is stuip
+    # return [get_red(pixel) for pixel in image]
+    return get_red.(image)
 end
 
 # ╔═╡ c427554a-6f6a-43f1-b03b-f83239887cee
@@ -318,7 +318,7 @@ Use the ➕ button at the bottom left of this cell to add more cells.
 """
 
 # ╔═╡ 21ba6e75-55a2-4614-9b5d-ea6378bf1d98
-
+value_as_color.(get_reds(philip_head))
 
 # ╔═╡ f7825c18-ff28-4e23-bf26-cc64f2f5049a
 md"""
@@ -327,8 +327,36 @@ md"""
 👉 Write four more functions, `get_green`, `get_greens`, `get_blue` and `get_blues`, to be the equivalents of `get_red` and `get_reds`. Use the ➕ button at the bottom left of this cell to add new cells.
 """
 
-# ╔═╡ d994e178-78fd-46ab-a1bc-a31485423cad
+# ╔═╡ 0c4654c6-c152-44c2-b10c-49f1634793b6
+function get_color(pixel::AbstractRGB, color_idx::Int)
+    if color_idx == 1
+        return pixel.r
+    elseif color_idx == 2
+        return pixel.g
+    else
+        return pixel.b
+    end
+end
 
+# ╔═╡ 6d3952bb-26db-47d3-8da6-785e8ccd59bc
+function get_green(pixel::AbstractRGB)
+    return get_color(pixel, 2)
+end
+
+# ╔═╡ 64e7f173-6b04-4ec6-b1fa-11d203d35860
+function get_blue(pixel::AbstractRGB)
+    return get_color(pixel, 3)
+end
+
+# ╔═╡ eae27b83-3b72-40d0-9c99-475d2207ce1e
+function get_greens(image::AbstractMatrix)
+    return get_green.(image)
+end
+
+# ╔═╡ c99bcf59-beee-4339-b0e8-0d3add073ebb
+function get_blues(image::AbstractMatrix)
+    return get_blue.(image)
+end
 
 # ╔═╡ c54ccdea-ee05-11ea-0365-23aaf053b7d7
 md"""
@@ -339,7 +367,7 @@ md"""
 # ╔═╡ f6898df6-ee07-11ea-2838-fde9bc739c11
 function mean_color(image)
     # your code here!
-    return missing
+    return RGB(mean(get_reds(image)), mean(get_greens(image)), mean(get_blues(image)))
 end
 
 # ╔═╡ 5be9b144-ee0d-11ea-2a8d-8775de265a1d
@@ -353,7 +381,7 @@ _At the end of this homework, you can see all of your filters applied to your we
 # ╔═╡ 63e8d636-ee0b-11ea-173d-bd3327347d55
 function invert(color::AbstractRGB)
     # your code here!
-    return missing
+    return RGB(1-color.r,1-color.g,1-color.b)
 end
 
 # ╔═╡ 2cc2f84e-ee0d-11ea-373b-e7ad3204bb00
@@ -375,7 +403,7 @@ invert(color_red)
 md"👉 Can you invert the picture of Philip?"
 
 # ╔═╡ 943103e2-ee0b-11ea-33aa-75a8a1529931
-philip_inverted = missing # replace `missing` with your code!
+philip_inverted = invert.(philip)# replace `missing` with your code!
 
 # ╔═╡ 55b138b7-19fb-4da1-9eb1-1e8304528251
 md"""
@@ -391,7 +419,7 @@ md"""
 # ╔═╡ fbd1638d-8d7a-4d12-aff9-9c160cc3fd74
 function quantize(x::Number)
     # your code here!
-    return missing
+    return floor(x,digits=1)
 end
 
 # ╔═╡ 7720740e-2d2b-47f7-98fd-500ed3eee479
@@ -2208,7 +2236,11 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─3f1a670b-44c2-4cab-909c-65f4ae9ed14b
 # ╠═21ba6e75-55a2-4614-9b5d-ea6378bf1d98
 # ╟─f7825c18-ff28-4e23-bf26-cc64f2f5049a
-# ╠═d994e178-78fd-46ab-a1bc-a31485423cad
+# ╠═0c4654c6-c152-44c2-b10c-49f1634793b6
+# ╠═6d3952bb-26db-47d3-8da6-785e8ccd59bc
+# ╠═64e7f173-6b04-4ec6-b1fa-11d203d35860
+# ╠═eae27b83-3b72-40d0-9c99-475d2207ce1e
+# ╠═c99bcf59-beee-4339-b0e8-0d3add073ebb
 # ╟─c54ccdea-ee05-11ea-0365-23aaf053b7d7
 # ╠═f6898df6-ee07-11ea-2838-fde9bc739c11
 # ╠═5be9b144-ee0d-11ea-2a8d-8775de265a1d
