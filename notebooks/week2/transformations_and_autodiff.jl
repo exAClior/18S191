@@ -758,7 +758,7 @@ uuid = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
 version = "0.8.6"
 
 [[Downloads]]
-deps = ["ArgTools", "LibCURL", "NetworkOptions"]
+deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 
 [[FileIO]]
@@ -766,6 +766,9 @@ deps = ["Pkg", "Requires", "UUIDs"]
 git-tree-sha1 = "9267e5f50b0e12fdfd5a2455534345c4cf2c7f7a"
 uuid = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
 version = "1.14.0"
+
+[[FileWatching]]
+uuid = "7b1f6079-737a-58dc-b8bc-7a2ca5c1b5ee"
 
 [[FixedPointNumbers]]
 deps = ["Statistics"]
@@ -1254,7 +1257,7 @@ uuid = "3f19e933-33d8-53b3-aaab-bd5110c3b7a0"
 # ╟─2e8c4a48-d535-44ac-a1f1-4cb26c4aece6
 # ╟─c0c90fec-0e55-4be3-8ea2-88b8705ee258
 # ╟─ce55beee-7643-11eb-04bc-b517703facff
-# ╟─005ca75a-7622-11eb-2ba4-9f450e71df1f
+# ╠═005ca75a-7622-11eb-2ba4-9f450e71df1f
 # ╠═ed3caab2-76bf-11eb-2544-21e8181adef5
 # ╟─2efaa336-7630-11eb-0c17-a7d4a0141dac
 # ╟─488d732c-7631-11eb-38c3-e9a9165d5606
