@@ -437,12 +437,18 @@ md"""
 
 # ╔═╡ 8b96e0bc-ee15-11ea-11cd-cfecea7075a0
 function convolve(M::AbstractMatrix, K::AbstractMatrix)
-	new_M = convert(Matrix{Float64},copy(M))
+	new_M = copy(M)
 	kr,kc = size(K)
 	mr,mc = size(M)
 	klr = (kr-1) ÷ 2
 	klc = (kc-1) ÷ 2
-	return missing
+	for i in 1:mr , j in 1:mc
+		new_M[i,j] *= 0.0
+		for m in -klr:klr, n in -klc:klc
+			new_M[i,j] += K[m+klr+1,n+klc+1] * extend(new_M,i+m,j+n)
+		end
+	end
+	return new_M 
 end
 
 # ╔═╡ 93284f92-ee12-11ea-0342-833b1a30625c
@@ -550,8 +556,11 @@ md"""
 
 # ╔═╡ aad67fd0-ee15-11ea-00d4-274ec3cda3a3
 function with_gaussian_blur(image; σ=3, l=5)
-	
-	return missing
+	gauss_m = Matrix{Float64}(undef, 2*l+1,2*l+1)
+	for i in -l:l, j in -l:l
+		gauss_m[i+l+1,j+l+1] = gauss(i,j;σ)
+	end
+	return convolve(image,gauss_m)
 end
 
 # ╔═╡ 8ae59674-ee18-11ea-3815-f50713d0fa08
@@ -602,8 +611,11 @@ Use your previous functions, and add cells to write helper functions as needed!
 
 # ╔═╡ 9eeb876c-ee15-11ea-1794-d3ea79f47b75
 function with_sobel_edge_detect(image)
-	
-	return missing
+	G_x = [1 0 -1; 2 0 -2; 1 0 -1]
+	G_y = [1 2 1; 0 0 0; -1 -2 -1]
+
+	G_total = sqrt.(G_x.^2 .+ G_y.^2)
+	return convolve(image,G_total)
 end
 
 # ╔═╡ 8ffe16ce-ee20-11ea-18bd-15640f94b839
